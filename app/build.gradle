@@ -1,5 +1,6 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    id 'maven-publish'
+    id 'com.android.library'
 }
 
 android {
@@ -7,7 +8,6 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.tacuchi_utils"
         minSdk 27
         targetSdk 33
         versionCode 1
@@ -29,10 +29,21 @@ android {
 }
 
 dependencies {
-
     implementation libs.appcompat
     implementation libs.material
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.espresso.core
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId 'com.example'
+            artifactId 'tacuchi_utils'
+            version '1.0.0'
+
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+        }
+    }
 }
