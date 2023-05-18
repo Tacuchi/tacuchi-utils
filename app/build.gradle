@@ -46,4 +46,14 @@ publishing {
             artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
         }
     }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/tacuchi/tacuchi-utils")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("tacuchi")
+                password = project.findProperty("gpr.key") ?: System.getenv("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")
+            }
+        }
+    }
 }
